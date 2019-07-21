@@ -8,11 +8,7 @@
 <html>
 <head>
     <title>权限管理系统</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/plugins/easyui/uimaker/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/plugins/easyui/uimaker/icon.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/plugins/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/plugins/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/plugins/easyui/easyui-lang-zh_CN.js"></script>
+    <%@include file="/static/common/common.jsp"%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/index.js"></script>
 </head>
 <body class="easyui-layout">
@@ -24,7 +20,7 @@
 
 <%--底部--%>
 <div data-options="region:'south'" style="height:50px; border-bottom: 3px solid #ec4e00">
-    <p align="center" style="font-size: 14px">撩课学院</p>
+    <p align="center" style="font-size: 14px">zldongly@163.com</p>
 </div>
 
 <%--左侧菜单--%>

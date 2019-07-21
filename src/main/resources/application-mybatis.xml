@@ -38,7 +38,7 @@
         <!-- 核心配置文件的位置 -->
         <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
         <!-- mapper 路径-->
-<!--        <property name="mapperLocations" value="classpath:com/dong/mapper/*Mapper.xml" />-->
+        <property name="mapperLocations" value="classpath:com/dong/mapper/*Mapper.xml" />
     </bean>
 
     <!-- 配置Mapper接口扫描 -->
