@@ -185,4 +185,16 @@ $(function () {
         })
     });
 
+    // 刷新按钮
+    $("#reload").click(function () {
+        var keyword = $("[name='keyword']").val('');    // 清空搜索
+        $("#dg").datagrid("load", {});
+    });
+
+    // 搜索按钮
+    $("#search").click(function () {
+        var keyword = $("[name='keyword']").val();
+        $("#dg").datagrid("load", {keyword: keyword});
+    });
+
 });

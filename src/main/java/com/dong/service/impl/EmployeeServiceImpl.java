@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public PageListRes getEmployee(QueryVo vo) {
 
         Page<Object> page = PageHelper.startPage(vo.getPage(), vo.getRows());
-        List<Employee> employees = employeeMapper.selectAll();
+        List<Employee> employees = employeeMapper.selectAll(vo);
 
         PageListRes pageListRes = new PageListRes();
         pageListRes.setTotal(page.getTotal());

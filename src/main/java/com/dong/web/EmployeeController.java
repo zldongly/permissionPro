@@ -29,6 +29,7 @@ public class EmployeeController {
     @RequestMapping("/employeeList")
     @ResponseBody
     public PageListRes employList(QueryVo vo) {
+        System.out.println(vo);
         PageListRes pageListRes = employeeService.getEmployee(vo);
 
         return pageListRes;

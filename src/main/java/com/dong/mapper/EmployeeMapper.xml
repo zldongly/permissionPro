@@ -59,18 +59,29 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
+    <sql id="where_sql">
+        <where>
+            <if test="keyword != null and keyword != ''">
+                e.username like concat('%', #{keyword}, '%')
+                or e.tel like concat('%', #{keyword}, '%')
+                or e.email like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </sql>
+
     <select id="selectAll" resultMap="BaseResultMap">
         select e.id,
-               e.username,
-               e.input_time,
-               e.tel,
-               e.email,
-               e.state,
-               e.admin,
-               e.dep_id,
-               d.id   as d_id,
-               d.name as d_name
+        e.username,
+        e.input_time,
+        e.tel,
+        e.email,
+        e.state,
+        e.admin,
+        e.dep_id,
+        d.id as d_id,
+        d.name as d_name
         from employee as e
-                 left join department d on e.dep_id = d.id
+        left join department d on e.dep_id = d.id
+        <include refid="where_sql"/>
     </select>
 </mapper>

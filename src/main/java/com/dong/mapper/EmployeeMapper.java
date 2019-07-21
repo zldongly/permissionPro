@@ -1,6 +1,8 @@
 package com.dong.mapper;
 
 import com.dong.domain.Employee;
+import com.dong.domain.QueryVo;
+
 import java.util.List;
 
 public interface EmployeeMapper {
@@ -10,7 +12,7 @@ public interface EmployeeMapper {
 
     Employee selectByPrimaryKey(Long id);
 
-    List<Employee> selectAll();
+    List<Employee> selectAll(QueryVo vo);
 
     int updateByPrimaryKey(Employee record);
 
