@@ -54,7 +54,7 @@ $(function () {
     // 对话框
     $("#dialog").dialog({
         width: 350,
-        height: 360,
+        height: 'auto',
         buttons: [{
             text: '保存', handler: function () {   // 提交表单
 
@@ -69,6 +69,14 @@ $(function () {
 
                 $("#employeeForm").form("submit", {
                     url: url,
+                    onSubmit: function (param) {
+                        // 获取选中的角色
+                        var values = $("#role").combobox("getValues");
+                        for (var i = 0; i < values.length; i++) {
+                            var rid = values[i];
+                            param["roles[" + i + "].rid"] = rid;
+                        }
+                    },
                     success: function (data) {
                         data = $.parseJSON(data);
                         if (data.success) {
@@ -104,6 +112,7 @@ $(function () {
             })
         }
     });
+
     // 管理员选择
     $("#state").combobox({
         width: 150,
@@ -118,6 +127,27 @@ $(function () {
         onLoadSuccess: function () {
             // 显示提示
             $("#state").each(function (i) {
+                var span = $(this).siblings("span")[i];
+                var targetInput = $(span).find("input:first");
+                if (targetInput) {
+                    $(targetInput).attr("placeholder", $(this).attr("placeholder"));
+                }
+            })
+        }
+    });
+
+    // 角色下拉列表
+    $("#role").combobox({
+        width: 150,
+        panelHeight: 'auto',
+        editable: false,
+        url: '/roleList',
+        textField: 'rname',
+        valueField: 'rid',
+        multiple: true,
+        onLoadSuccess: function () {
+            // 显示提示
+            $("#role").each(function (i) {
                 var span = $(this).siblings("span")[i];
                 var targetInput = $(span).find("input:first");
                 if (targetInput) {
@@ -145,12 +175,19 @@ $(function () {
             $.messager.alert("提示", "请选择一行数据");
             return;
         }
+
+        $("#employeeForm").form("clear");   // 清空表单
+        // 回显
         if (rowData['department']) {     // 显示部门
             rowData['department.id'] = rowData['department'].id;
         }
-        if (rowData['admin']) {             // 转成字符串 显示中文
+        if (rowData['admin'] != null) {             // 转成字符串 显示中文
             rowData['admin'] = rowData['admin'] + "";
         }
+        $.get("/getRoleByEid?eid=" + rowData.id, function (data) {  // 显示角色
+            $("#role").combobox("setValues", data)
+        });
+
         $("[name='password']").validatebox({required: false});
         $("#password").hide();      // 隐藏密码栏
         // 弹出对话框

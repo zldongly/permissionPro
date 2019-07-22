@@ -21,11 +21,23 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <insert id="insert" parameterType="com.dong.domain.Employee">
+    <delete id="deleteRoleRel">
+        delete
+        from employee_role_rel
+        where eid = #{eid}
+    </delete>
+
+    <insert id="insert" parameterType="com.dong.domain.Employee"
+            useGeneratedKeys="true" keyProperty="id">
         insert into employee (id, username, password, input_time,
                               tel, email, state, admin, dep_id)
         values (#{id}, #{username}, #{password}, #{inputTime},
                 #{tel}, #{email}, #{state}, #{admin}, #{department.id})
+    </insert>
+
+    <insert id="insertRoleRel">
+        insert into employee_role_rel(eid, rid)
+        VALUES (#{eid}, #{rid})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.dong.domain.Employee">
@@ -82,6 +94,7 @@
         d.name as d_name
         from employee as e
         left join department d on e.dep_id = d.id
+        order by e.id
         <include refid="where_sql"/>
     </select>
 </mapper>

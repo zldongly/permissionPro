@@ -3,6 +3,7 @@ package com.dong.service.impl;
 import com.dong.domain.Employee;
 import com.dong.domain.PageListRes;
 import com.dong.domain.QueryVo;
+import com.dong.domain.Role;
 import com.dong.mapper.EmployeeMapper;
 import com.dong.service.EmployeeService;
 import com.github.pagehelper.Page;
@@ -44,12 +45,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void saveEmployee(Employee employee) {
         employeeMapper.insert(employee);
+
+        for (Role role : employee.getRoles()) {
+            employeeMapper.insertRoleRel(employee.getId(), role.getRid());
+        }
+
     }
 
     // 更新
     @Override
     public void updateEmployee(Employee employee) {
-        employeeMapper.updateByPrimaryKey(employee);
+        employeeMapper.updateByPrimaryKey(employee);    // 更新员工
+
+        // 更新员工 角色
+        employeeMapper.deleteRoleRel(employee.getId()); // 删除关系
+        for (Role role : employee.getRoles()) {         // 重建关系
+            employeeMapper.insertRoleRel(employee.getId(), role.getRid());
+        }
     }
 
     // 离职
