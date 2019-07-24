@@ -8,6 +8,7 @@ import com.dong.mapper.EmployeeMapper;
 import com.dong.service.EmployeeService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 添加员工
     @Override
     public void saveEmployee(Employee employee) {
+        Md5Hash hash = new Md5Hash(employee.getPassword(), employee.getUsername(), 2);
+        employee.setPassword(hash.toString());
+
         employeeMapper.insert(employee);
 
         for (Role role : employee.getRoles()) {
@@ -68,6 +72,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void updateState(Long id) {
         employeeMapper.updateState(id);
+    }
+
+    @Override
+    public Employee getEmployeeWithUsername(String username) {
+        return employeeMapper.getEmployeeWithUsername(username);
+    }
+
+    @Override
+    public List<String> getRolesByEid(Long eid) {
+        return employeeMapper.getRolesByEid(eid);
+    }
+
+    @Override
+    public List<String> getPermissionsByEid(Long eid) {
+        return employeeMapper.getPermissionsByEid(eid);
     }
 
 }

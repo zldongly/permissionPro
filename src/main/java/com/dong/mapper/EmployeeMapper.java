@@ -25,4 +25,12 @@ public interface EmployeeMapper {
 
     // 删除角色关系
     void deleteRoleRel(Long eid);
+
+    Employee getEmployeeWithUsername(String username);
+
+    // 根据 employee id 查询 role rnum
+    List<String> getRolesByEid(Long eid);
+
+    // 根据 employee id 查询 permission
+    List<String> getPermissionsByEid(Long eid);
 }

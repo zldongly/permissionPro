@@ -21,6 +21,6 @@ public interface RoleMapper {
 
     int deletePermissionRel(Long rid);
 
-    // 根据employ id 查角色  rel
+    // 根据employ id 查角色rid  rel
     List<Long> getRoleByEid(Long eid);
 }

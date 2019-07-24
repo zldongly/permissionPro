@@ -97,4 +97,23 @@
         order by e.id
         <include refid="where_sql"/>
     </select>
+    <select id="getEmployeeWithUsername" resultType="com.dong.domain.Employee">
+        select *
+        from employee
+        where username = #{username}
+    </select>
+
+    <select id="getRolesByEid" resultType="java.lang.String">
+        select r.rnum
+        from employee_role_rel as er
+                 left join role as r on er.rid = r.rid
+        where er.eid = #{eid}
+    </select>
+    <select id="getPermissionsByEid" resultType="java.lang.String">
+        select distinct p.presource
+        from role_permission_rel as rp
+                 left join permission as p
+                           on rp.pid = p.pid
+        where rp.rid in (select rid from employee_role_rel where eid = #{eid})
+    </select>
 </mapper>
