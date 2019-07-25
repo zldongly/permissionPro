@@ -19,4 +19,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="com.dong.interceptor.RequestInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

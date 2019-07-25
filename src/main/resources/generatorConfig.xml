@@ -84,15 +84,13 @@
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
-		<!--
-           mapper接口生成策略
-        -->
+		<!-- mapper接口生成策略 -->
 		<javaClientGenerator targetPackage="com.dong.mapper"
 							 type="XMLMAPPER" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="menu"></table>
+		<table tableName="systemlog"></table>
 
 	</context>
 </generatorConfiguration>

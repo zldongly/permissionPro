@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.mapper.SystemlogMapper">
+  <resultMap id="BaseResultMap" type="com.dong.domain.Systemlog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optime" jdbcType="TIMESTAMP" property="optime" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="func" jdbcType="VARCHAR" property="func" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from systemlog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.dong.domain.Systemlog">
+    insert into `systemlog` (id, optime, ip, func, params)
+    values (#{id}, #{optime}, #{ip}, #{func}, #{params})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.dong.domain.Systemlog">
+    update systemlog
+    set optime = #{optime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      func = #{func,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, optime, ip, func, params
+    from systemlog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, optime, ip, func, params
+    from systemlog
+  </select>
+</mapper>
