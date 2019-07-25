@@ -87,7 +87,7 @@ $(function () {
                             $.messager.alert("提示", data.msg);
                         }
                     }
-                })
+                });
             }
         }],
         closed: true

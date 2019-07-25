@@ -1,5 +1,11 @@
 package com.dong.domain;
 
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 public class Menu {
     private Long id;
 
@@ -7,37 +13,10 @@ public class Menu {
 
     private String url;
 
-    private Long parentId;
+    private Menu parent;
 
-    public Long getId() {
-        return id;
-    }
+    private Permission permission;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<Menu> children = new ArrayList<>();
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
 }

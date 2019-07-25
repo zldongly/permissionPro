@@ -1,3 +1,4 @@
+<%@page isELIgnored="false" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/plugins/easyui/uimaker/easyui.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/plugins/easyui/uimaker/icon.css">

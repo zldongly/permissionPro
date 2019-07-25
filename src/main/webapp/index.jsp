@@ -4,8 +4,6 @@
   Date: 2019/7/15
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page isELIgnored="false" %>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>权限管理系统</title>
