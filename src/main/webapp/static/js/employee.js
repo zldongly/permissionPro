@@ -157,6 +157,32 @@ $(function () {
         }
     });
 
+    // 上传对话框
+    $("#excelUpload").dialog({
+        width:260,
+        height:180,
+        title:"导入Excel",
+        buttons:[{
+            text:'保存',
+            handler:function(){
+                $("#uploadForm").form("submit", {
+                    url: '/uploadExcel',
+                    success: function (data) {
+                        data = $.parseJSON(data);
+                        if (data.success) {
+                            $.messager.alert("提示", data.msg);
+                            $("#excelUpload").dialog("close");   // 关闭对话框
+                            //$("#dg").datagrid("reload");    // 重新加载
+                        } else {
+                            $.messager.alert("提示", data.msg);
+                        }
+                    }
+                })
+            }
+        }],
+        closed:true
+    });
+
 
     // 添加按钮
     $("#add").click(function () {
@@ -232,6 +258,22 @@ $(function () {
     $("#search").click(function () {
         var keyword = $("[name='keyword']").val();
         $("#dg").datagrid("load", {keyword: keyword});
+    });
+
+    // 导出按钮
+    $("#excelOut").click(function () {
+        window.open('/downloadExcel');
+    });
+
+    // 导入按钮
+    $("#excelImport").click(function () {
+        $("#excelUpload").dialog("open");
+    });
+
+
+    // 下载Excel模板
+    $("#downloadTml").click(function () {
+        window.open("/downloadExcelTpl");
     });
 
 });

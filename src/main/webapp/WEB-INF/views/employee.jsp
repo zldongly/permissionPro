@@ -25,8 +25,14 @@
         <a href="#" class="easyui-linkbutton" data-options="iconCls: 'icon-remove', plain: true" id="remove">离职</a>
     </shiro:hasPermission>
     <a href="#" class="easyui-linkbutton" data-options="iconCls: 'icon-reload', plain: true" id="reload">刷新</a>
-    <input type="text" name="keyword" style="width:200px; height:30px; padding-left: 5px">
+    <input type="text" name="keyword" style="width:200px; height:30px; padding-left: 5px" ;>
     <a href="#" class="easyui-linkbutton" data-options="iconCls: 'icon-search'" id="search">查询</a>
+    <shiro:hasPermission name="employee:edit">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls: 'icon-edit', plain: true" id="excelOut"
+           style=" margin-left: 5px">excel导出</a>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls: 'icon-edit', plain: true"
+           id="excelImport">excel导入</a>
+    </shiro:hasPermission>
 </div>
 
 <%--数据展示--%>
@@ -70,6 +76,18 @@
                 <td><input id="role" name="role.rid" placeholder="请选择角色"/></td>
             </tr>
         </table>
+    </form>
+</div>
+
+<%--上传框--%>
+<div id="excelUpload">
+    <form method="post" enctype="multipart/form-data" id="uploadForm">
+        <tabel>
+            <tr>
+                <td><input type="file" name="excel" style="width: 180px; margin-top: 20px; margin-left: 5px;"></td>
+                <td><a href="javascript:void(0);" id="downloadTml">下载模板</a></td>
+            </tr>
+        </tabel>
     </form>
 </div>
 
