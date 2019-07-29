@@ -94,8 +94,8 @@
         d.name as d_name
         from employee as e
         left join department d on e.dep_id = d.id
-        order by e.id
         <include refid="where_sql"/>
+        order by e.id
     </select>
     <select id="getEmployeeWithUsername" resultType="com.dong.domain.Employee">
         select *

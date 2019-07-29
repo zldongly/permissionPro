@@ -47,7 +47,7 @@ public class EmployeeController {
         return "employee";
     }
 
-    // 获取所有
+    // 分页获取 和 条件查找
     @RequestMapping("/employeeList")
     @ResponseBody
     @RequiresPermissions("employee:index")
