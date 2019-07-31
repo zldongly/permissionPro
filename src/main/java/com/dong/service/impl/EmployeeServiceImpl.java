@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     // 添加员工
     @Override
-    public void saveEmployee(Employee employee) {
+    public void addEmployee(Employee employee) {
         Md5Hash hash = new Md5Hash(employee.getPassword(), employee.getUsername(), 2);
         employee.setPassword(hash.toString());
 

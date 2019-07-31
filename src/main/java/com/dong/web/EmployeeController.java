@@ -59,14 +59,14 @@ public class EmployeeController {
     }
 
     // 添加
-    @RequestMapping("saveEmployee")
+    @RequestMapping("addEmployee")
     @ResponseBody
     @RequiresPermissions("employee:add")
     public AjaxRes saveEmployee(Employee employee) {
         AjaxRes res = new AjaxRes();
         try {
             employee.setState(true);
-            employeeService.saveEmployee(employee);
+            employeeService.addEmployee(employee);
             res.setSuccess(true);
             res.setMsg("保存成功");
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class EmployeeController {
         stream.close();     // 关闭
     }
 
-    // 上传Excel
+    // 上传 解析Excel
     @RequestMapping("uploadExcel")
     @ResponseBody
     public AjaxRes uploadExcel(MultipartFile excel) {
@@ -188,7 +188,7 @@ public class EmployeeController {
                 employee.setEmail((String) getCellValue(employeeRow.getCell(4)));
                 employee.setPassword(employee.getUsername());
 
-                employeeService.saveEmployee(employee);
+                employeeService.addEmployee(employee);
             }
 
             res.setMsg("导入成功");

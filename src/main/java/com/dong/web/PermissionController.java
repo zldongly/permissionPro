@@ -2,6 +2,7 @@ package com.dong.web;
 
 import com.dong.domain.Permission;
 import com.dong.service.PermissionService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class PermissionController {
     // 查找所有权限
     @RequestMapping("getPermission")
     @ResponseBody
+    @RequiresPermissions("role:index")
     public List<Permission> getPermission() {
         List<Permission> permissions = permissionService.getPermissions();
         return permissions;
@@ -30,10 +32,9 @@ public class PermissionController {
     // role id 查看对应权限
     @RequestMapping("getPermissionByRid")
     @ResponseBody
+    @RequiresPermissions("role:index")
     public List<Permission> getPermissionByRid(Long rid) {
-        System.out.println(rid);
-        List<Permission> permissions = permissionService.getPermissionByRid(rid);
-        return permissions;
+        return permissionService.getPermissionByRid(rid);
     }
 
 }

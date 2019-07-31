@@ -137,7 +137,7 @@ $(function () {
         }
 
         // 确认离职
-        $.messager.confirm("确认", "是否做离职操作", function (res) {
+        $.messager.confirm("确认", "是否做删除操作", function (res) {
             if (res) {   // 确认离职
                 $.get("/deleteRole?rid=" + rowData.rid, function (data) {
                     if (data.success) {

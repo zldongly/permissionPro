@@ -6,6 +6,7 @@ import com.dong.domain.PageListRes;
 import com.dong.domain.QueryVo;
 import com.dong.service.EmployeeService;
 import com.dong.service.MenuService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class MenuController {
     private MenuService menuService;
 
     @RequestMapping("/menu")
+    @RequiresPermissions("menu:index")
     public String menu() {
         return "menu";
     }
@@ -31,14 +33,16 @@ public class MenuController {
     // 分页查询
     @RequestMapping("menuList")
     @ResponseBody
+    @RequiresPermissions("menu:index")
     public PageListRes menuList(QueryVo vo) {
         PageListRes res =menuService.getMenuList(vo);
         return res;
     }
 
-    // 查询所有
+    // 查询所有 添加编辑菜单时使用
     @RequestMapping("/parentMenuList")
     @ResponseBody
+    @RequiresPermissions("menu:index")
     public List<Menu> parentMenuList() {
         return menuService.parentList();
     }
@@ -46,6 +50,7 @@ public class MenuController {
     // 添加
     @RequestMapping("/addMenu")
     @ResponseBody
+    @RequiresPermissions("menu:index")
     public AjaxRes addMenu(Menu menu) {
         AjaxRes res = new AjaxRes();
         try {
@@ -62,11 +67,13 @@ public class MenuController {
     // 更新
     @RequestMapping("editMenu")
     @ResponseBody
+    @RequiresPermissions("menu:index")
     public AjaxRes editMenu(Menu menu) {
         return menuService.updateMenu(menu);
     }
 
     // 删除
+    @RequiresPermissions("menu:index")
     @RequestMapping("deleteMenu")
     @ResponseBody
     public AjaxRes deleteMenu(Long id) {

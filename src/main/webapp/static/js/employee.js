@@ -64,7 +64,7 @@ $(function () {
                 if (id) {
                     url = "/updateEmployee"
                 } else {
-                    url = "/saveEmployee"
+                    url = "/addEmployee"
                 }
 
                 $("#employeeForm").form("submit", {

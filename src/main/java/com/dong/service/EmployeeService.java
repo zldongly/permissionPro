@@ -15,7 +15,7 @@ public interface EmployeeService {
     public PageListRes getEmployee(QueryVo vo);
 
     // 添加员工
-    void saveEmployee(Employee employee);
+    void addEmployee(Employee employee);
 
     // 更新员工信息
     void updateEmployee(Employee employee);
