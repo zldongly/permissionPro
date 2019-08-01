@@ -188,7 +188,7 @@ public class EmployeeController {
                 employee.setEmail((String) getCellValue(employeeRow.getCell(4)));
                 employee.setPassword(employee.getUsername());
 
-                employeeService.addEmployee(employee);
+                employeeService.addEmployee(employee);      // 添加一条员工数据
             }
 
             res.setMsg("导入成功");

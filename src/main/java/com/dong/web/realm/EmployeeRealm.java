@@ -65,7 +65,7 @@ public class EmployeeRealm extends AuthorizingRealm {
         if (employee == null)
             return null;
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                employee, employee.getPassword(), ByteSource.Util.bytes(employee.getUsername()), this.getName());
+                employee, employee.getPassword(), ByteSource.Util.bytes(employee.getSalt()), this.getName());
 
         return info;
     }

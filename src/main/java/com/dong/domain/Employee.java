@@ -16,6 +16,8 @@ public class Employee {
 
     private String password;
 
+    private String salt;
+
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date inputTime;

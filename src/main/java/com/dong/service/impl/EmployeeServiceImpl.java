@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by dongly on 2019/7/19
@@ -43,7 +44,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 添加员工
     @Override
     public void addEmployee(Employee employee) {
-        Md5Hash hash = new Md5Hash(employee.getPassword(), employee.getUsername(), 2);
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        employee.setSalt(uuid);
+        Md5Hash hash = new Md5Hash(employee.getPassword(), employee.getSalt(), 2);
         employee.setPassword(hash.toString());
 
         employeeMapper.insert(employee);

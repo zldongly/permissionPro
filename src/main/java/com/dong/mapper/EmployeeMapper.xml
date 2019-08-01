@@ -29,9 +29,9 @@
 
     <insert id="insert" parameterType="com.dong.domain.Employee"
             useGeneratedKeys="true" keyProperty="id">
-        insert into employee (id, username, password, input_time,
+        insert into employee (id, username, password, salt, input_time,
                               tel, email, state, admin, dep_id)
-        values (#{id}, #{username}, #{password}, #{inputTime},
+        values (#{id}, #{username}, #{password}, #{salt}, #{inputTime},
                 #{tel}, #{email}, #{state}, #{admin}, #{department.id})
     </insert>
 
