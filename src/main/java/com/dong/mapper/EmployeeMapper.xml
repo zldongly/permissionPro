@@ -95,7 +95,7 @@
         from employee as e
         left join department d on e.dep_id = d.id
         <include refid="where_sql"/>
-        order by e.id
+        order by e.input_time DESC
     </select>
     <select id="getEmployeeWithUsername" resultType="com.dong.domain.Employee">
         select *
