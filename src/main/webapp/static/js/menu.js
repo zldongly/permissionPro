@@ -129,7 +129,9 @@ $(function () {
         $.messager.confirm("确认", "是否做删除菜单操作", function (res) {
             if(res) {   // 确认删除
                 $.post("/deleteMenu", {id: rowData.id}, function (data) {
-                    //data = $.parseJSON(data);
+                    if (typeof(data) == "string") {
+                        data = $.parseJSON(data);
+                    }
                     if (data.success) {
                         $.messager.alert("提示", data.msg);
                         $("#menu_datagrid").datagrid("reload");    // 重新加载
