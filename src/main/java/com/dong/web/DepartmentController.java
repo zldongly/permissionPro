@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Controller
-public class DepartmentController {
+public class DepartmentController extends BaseController{
 
     @Autowired
     private DepartmentService departmentService;

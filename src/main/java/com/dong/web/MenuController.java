@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Controller
-public class MenuController {
+public class MenuController extends BaseController{
 
     @Autowired
     private MenuService menuService;

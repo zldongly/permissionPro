@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Controller
-public class PermissionController {
+public class PermissionController extends BaseController{
 
     @Autowired
     private PermissionService permissionService;

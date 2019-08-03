@@ -36,7 +36,7 @@ import java.util.List;
  */
 
 @Controller
-public class EmployeeController {
+public class EmployeeController extends BaseController{
 
     @Autowired
     private EmployeeService employeeService;
@@ -220,21 +220,4 @@ public class EmployeeController {
         return cell;
     }
 
-
-    // 没有权限处理
-    @ExceptionHandler(AuthorizationException.class)
-    public void handleShiroException(HandlerMethod method, HttpServletResponse response) throws IOException {
-        // 判断请求方式
-        ResponseBody methodAnnotation = method.getMethodAnnotation(ResponseBody.class); // 获取方法上的注解
-        if (methodAnnotation != null) {
-            AjaxRes ajaxRes = new AjaxRes();
-            ajaxRes.setSuccess(false);
-            ajaxRes.setMsg("没有权限");
-            String s = new ObjectMapper().writeValueAsString(ajaxRes);
-            response.setCharacterEncoding("utf-8");
-            response.getWriter().println(s);
-        } else {
-            response.sendRedirect("noPermission.jsp");
-        }
-    }
 }
