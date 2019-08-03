@@ -13,3 +13,4 @@ INSERT INTO `permission`(`pid`, `pname`, `presource`) VALUES (3, '员工编辑',
 INSERT INTO `permission`(`pid`, `pname`, `presource`) VALUES (4, '员工主页', 'employee:index');
 INSERT INTO `permission`(`pid`, `pname`, `presource`) VALUES (5, '角色权限主页', 'role:index');
 INSERT INTO `permission`(`pid`, `pname`, `presource`) VALUES (6, '菜单主页', 'menu:index');
+INSERT INTO `permission`(`pid`, `pname`, `presource`) VALUES (7, '部门主页', 'department:index');

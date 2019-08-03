@@ -1,3 +1,4 @@
+-- 先创建 department 数据表
 CREATE TABLE `employee` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,

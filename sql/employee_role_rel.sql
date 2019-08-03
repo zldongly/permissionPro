@@ -1,3 +1,4 @@
+-- 先创建 role 和 employee 数据表
 CREATE TABLE `employee_role_rel` (
   `eid` bigint(20) NOT NULL,
   `rid` bigint(20) NOT NULL,

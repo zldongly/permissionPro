@@ -1,4 +1,4 @@
-
+-- 先创建 permission 数据表
 CREATE TABLE `menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `text` varchar(50) NOT NULL,
@@ -19,3 +19,4 @@ INSERT INTO `menu`(`id`, `text`, `url`, `parent_id`, `permission_id`) VALUES (1,
 INSERT INTO `menu`(`id`, `text`, `url`, `parent_id`, `permission_id`) VALUES (2, '员工管理', '/employee', 1, 4);
 INSERT INTO `menu`(`id`, `text`, `url`, `parent_id`, `permission_id`) VALUES (3, '角色权限管理', '/role', 1, 5);
 INSERT INTO `menu`(`id`, `text`, `url`, `parent_id`, `permission_id`) VALUES (4, '菜单管理', '/menu', 1, 6);
+INSERT INTO `menu`(`id`, `text`, `url`, `parent_id`, `permission_id`) VALUES (4, '部门管理', '/department', 1, 7);
