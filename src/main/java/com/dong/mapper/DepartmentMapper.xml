@@ -18,6 +18,13 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <update id="deleteEmployeeDepRel">
+    update employee
+    set dep_id = null
+    where dep_id = #{depId}
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select id, name
     from department

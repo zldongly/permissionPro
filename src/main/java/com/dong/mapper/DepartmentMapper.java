@@ -13,4 +13,7 @@ public interface DepartmentMapper {
     List<Department> selectAll();
 
     int updateByPrimaryKey(Department record);
+
+    // 删除员工表中的该部门信息
+    int deleteEmployeeDepRel(Long depId);
 }
