@@ -1,0 +1,22 @@
+.pro_in {
+    padding: 5px;
+    min-width: 250px;
+    font-size: 16px;
+}
+
+.pro_ti {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.pro_un {
+    margin-top: 8px;
+}
+
+.pro_box {
+    position: absolute;
+    left: 160px;
+    top: 40px;
+    min-width: 380px;
+}

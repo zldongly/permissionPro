@@ -1,5 +1,6 @@
 package com.dong.service;
 
+import com.dong.domain.AjaxRes;
 import com.dong.domain.Employee;
 import com.dong.domain.PageListRes;
 import com.dong.domain.QueryVo;
@@ -31,4 +32,13 @@ public interface EmployeeService {
 
     // 查询 permission
     List<String> getPermissionsByEid(Long id);
+
+    // 获取本人信息
+    Employee myProfile();
+
+    // 更新个人信息
+    AjaxRes updateProfile(Employee employee);
+
+    // 修改密码
+    AjaxRes updatePassword(String newPwd);
 }

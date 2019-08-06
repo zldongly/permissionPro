@@ -58,6 +58,20 @@
         where id = #{id};
     </update>
 
+    <update id="updateProfile">
+        update employee
+        set tel   = #{tel},
+            email = #{email}
+        where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update employee
+        set password = #{password},
+            salt     = #{salt}
+        where id = #{id}
+    </update>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select id,
                username,
@@ -116,4 +130,12 @@
                            on rp.pid = p.pid
         where rp.rid in (select rid from employee_role_rel where eid = #{eid})
     </select>
+
+    <select id="getDepartmentByEid" resultType="com.dong.domain.Department">
+        select d.id, d.name
+        from employee e
+                 left join department d on e.dep_id = d.id
+        where e.id = #{eid}
+    </select>
+
 </mapper>

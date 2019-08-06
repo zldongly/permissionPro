@@ -1,14 +1,13 @@
 package com.dong.service.impl;
 
-import com.dong.domain.Employee;
-import com.dong.domain.PageListRes;
-import com.dong.domain.QueryVo;
-import com.dong.domain.Role;
+import com.dong.domain.*;
 import com.dong.mapper.EmployeeMapper;
 import com.dong.service.EmployeeService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,6 +87,58 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<String> getPermissionsByEid(Long eid) {
         return employeeMapper.getPermissionsByEid(eid);
+    }
+
+    @Override
+    public Employee myProfile() {
+        Employee employee = (Employee) SecurityUtils.getSubject().getPrincipal();
+        Department department = employeeMapper.getDepartmentByEid(employee.getId());
+        employee.setDepartment(department);
+        return employee;
+    }
+
+    @Override
+    public AjaxRes updateProfile(Employee employee) {
+        AjaxRes res = new AjaxRes();
+        try {
+            Employee self = (Employee) SecurityUtils.getSubject().getPrincipal();
+            self.setTel(employee.getTel());
+            self.setEmail(employee.getEmail());
+            employeeMapper.updateProfile(self);
+            // 更新 Subject
+            SimplePrincipalCollection collection = new SimplePrincipalCollection(self, self.getUsername());
+            SecurityUtils.getSubject().runAs(collection);
+
+            res.setSuccess(true);
+            res.setMsg("更新成功");
+        } catch (Exception e) {
+            res.setSuccess(false);
+            res.setMsg("更新失败");
+        }
+        return res;
+    }
+
+    @Override
+    public AjaxRes updatePassword(String newPwd) {
+        AjaxRes res = new AjaxRes();
+        try {
+            Employee self = (Employee) SecurityUtils.getSubject().getPrincipal();
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");     // 新的UUID
+            self.setSalt(uuid);
+            Md5Hash hash = new Md5Hash(newPwd, self.getSalt(), 2);
+            self.setPassword(hash.toString());
+            employeeMapper.updatePassword(self);
+            // 更新 Subject
+            SimplePrincipalCollection collection = new SimplePrincipalCollection(self, self.getUsername());
+            SecurityUtils.getSubject().runAs(collection);
+
+            res.setSuccess(true);
+            res.setMsg("修改成功");
+        } catch (Exception e) {
+            res.setSuccess(false);
+            res.setMsg("修改失败");
+        }
+        return res;
     }
 
 }

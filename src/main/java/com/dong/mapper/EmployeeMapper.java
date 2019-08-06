@@ -1,5 +1,6 @@
 package com.dong.mapper;
 
+import com.dong.domain.Department;
 import com.dong.domain.Employee;
 import com.dong.domain.QueryVo;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,13 @@ public interface EmployeeMapper {
 
     // 根据 employee id 查询 permission
     List<String> getPermissionsByEid(Long eid);
+
+    // 根据employee id 查询 department
+    Department getDepartmentByEid(Long eid);
+
+    // 修改个人信息
+    int updateProfile(Employee employee);
+
+    // 修改密码
+    int updatePassword(Employee self);
 }

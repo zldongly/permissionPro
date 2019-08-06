@@ -2,6 +2,7 @@ $(function () {
     $("#tabs").tabs({
         fit: true
     });
+
     $('#tree').tree({
         url: "/getTreeData",
         lines: true,
@@ -24,10 +25,10 @@ $(function () {
             }
         },
         onLoadSuccess: function (node, data) {
-            console.log(data[0].children[0].id);
+            //console.log(data[0].children[0].id);
             if (data.length > 0) {
                 //找到第一个元素
-                var n = $('#tree').tree('find', data[0].children[0].id);
+                var n = $('#tree').tree('find', data[1].id);
                 //调用选中事件
                 $('#tree').tree('select', n.target);
             }
