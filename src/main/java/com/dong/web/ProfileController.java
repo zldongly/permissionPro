@@ -26,8 +26,11 @@ public class ProfileController {
     public ModelAndView employee() {
         ModelAndView modelAndView = new ModelAndView();
         Employee employee = employeeService.myProfile();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = formatter.format(employee.getInputTime());
+        String dateString = "";
+        if (employee.getInputTime() != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            dateString = formatter.format(employee.getInputTime());
+        }
 
         modelAndView.addObject("employee", employee);
         modelAndView.addObject("inputDate", dateString);
