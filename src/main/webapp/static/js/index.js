@@ -25,13 +25,17 @@ $(function () {
             }
         },
         onLoadSuccess: function (node, data) {
-            //console.log(data[0].children[0].id);
-            if (data.length > 0) {
-                //找到第一个元素
-                var n = $('#tree').tree('find', data[1].id);
-                //调用选中事件
-                $('#tree').tree('select', n.target);
+            // 默认打开个人信息界面
+            var u;
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].url == '/profile') {
+                    u = i;
+                    break;
+                }
             }
+            var n = $('#tree').tree('find', data[u].id);
+            //调用选中事件
+            $('#tree').tree('select', n.target);
         }
     });
 });
