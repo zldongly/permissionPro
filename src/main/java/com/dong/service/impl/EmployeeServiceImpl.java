@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by dongly on 2019/7/19
@@ -47,6 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setSalt(uuid);
         Md5Hash hash = new Md5Hash(employee.getPassword(), employee.getSalt(), 2);
         employee.setPassword(hash.toString());
+
+        if (employee.getState() == null) employee.setState(true);
+        if (employee.getAdmin() == null) employee.setAdmin(false);
 
         employeeMapper.insert(employee);
 
@@ -102,6 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         AjaxRes res = new AjaxRes();
         try {
             Employee self = (Employee) SecurityUtils.getSubject().getPrincipal();
+            self.setRealName(employee.getRealName());
             self.setTel(employee.getTel());
             self.setEmail(employee.getEmail());
             employeeMapper.updateProfile(self);

@@ -52,7 +52,7 @@ public class EmployeeController extends BaseController{
     @ResponseBody
     @RequiresPermissions("employee:index")
     public PageListRes employList(QueryVo vo) {
-        System.out.println(vo);
+        //System.out.println(vo);
         PageListRes pageListRes = employeeService.getEmployee(vo);
 
         return pageListRes;
@@ -129,23 +129,31 @@ public class EmployeeController extends BaseController{
         HSSFRow row = sheet.createRow(0);   // 创建一行
         row.createCell(0).setCellValue("编号");
         row.createCell(1).setCellValue("用户名");
-        row.createCell(2).setCellValue("入职日期");
-        row.createCell(3).setCellValue("电话");
-        row.createCell(4).setCellValue("邮件");
+        row.createCell(2).setCellValue("真实姓名");
+        row.createCell(3).setCellValue("入职日期");
+        row.createCell(4).setCellValue("电话");
+        row.createCell(5).setCellValue("邮件");
+        row.createCell(6).setCellValue("在职");
         // 填写数据
         HSSFRow employeeRow = null;
         for (int i = 0; i < employees.size(); i++) {
             Employee employee = employees.get(i);
             employeeRow = sheet.createRow(i + 1);
-            employeeRow.createCell(0).setCellValue(employee.getId());
+            employeeRow.createCell(0).setCellValue(i+1);
             employeeRow.createCell(1).setCellValue(employee.getUsername());
-            if (employee.getInputTime() != null) {
+            employeeRow.createCell(2).setCellValue(employee.getRealName());
+                if (employee.getInputTime() != null) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String date = dateFormat.format(employee.getInputTime());
-                employeeRow.createCell(2).setCellValue(date);
+                employeeRow.createCell(3).setCellValue(date);
             }
-            employeeRow.createCell(3).setCellValue(employee.getTel());
-            employeeRow.createCell(4).setCellValue(employee.getEmail());
+            employeeRow.createCell(4).setCellValue(employee.getTel());
+            employeeRow.createCell(5).setCellValue(employee.getEmail());
+            if (employee.getState()) {
+                employeeRow.createCell(6).setCellValue("是");
+            } else {
+                employeeRow.createCell(6).setCellValue("否");
+            }
         }
         // 下载
         String filename = new String("员工信息.xls".getBytes("utf-8"), "iso8859-1");
@@ -182,10 +190,11 @@ public class EmployeeController extends BaseController{
                 Employee employee = new Employee();
                 employeeRow = sheet.getRow(i);
                 employee.setUsername((String) getCellValue(employeeRow.getCell(1)));
-                employee.setInputTime((Date) getCellValue(employeeRow.getCell(2)));
-                long tel = (long) (double) getCellValue(employeeRow.getCell(3));
+                employee.setRealName((String) getCellValue(employeeRow.getCell(2)));
+                employee.setInputTime((Date) getCellValue(employeeRow.getCell(3)));
+                long tel = (long) (double) getCellValue(employeeRow.getCell(4));
                 employee.setTel(String.valueOf(tel));
-                employee.setEmail((String) getCellValue(employeeRow.getCell(4)));
+                employee.setEmail((String) getCellValue(employeeRow.getCell(5)));
                 employee.setPassword(employee.getUsername());
 
                 employeeService.addEmployee(employee);      // 添加一条员工数据

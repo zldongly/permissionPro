@@ -4,7 +4,8 @@ $(function () {
     $("#dg").datagrid({
         url: "/employeeList",
         columns: [[
-            {field: 'username', title: '姓名', width: 100, align: 'center'},
+            {field: 'username', title: '用户名', width: 100, align: 'center'},
+            {field: 'realName', title: '真实姓名', width: 100, align: 'center'},
             {field: 'inputTime', title: '入职时间', width: 100, align: 'center'},
             {field: 'tel', title: '电话', width: 100, align: 'center'},
             {field: 'email', title: '邮箱', width: 100, align: 'center'},

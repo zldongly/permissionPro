@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.dong.domain.Employee">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
         <result column="input_time" jdbcType="TIMESTAMP" property="inputTime"/>
         <result column="tel" jdbcType="VARCHAR" property="tel"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
@@ -29,9 +30,9 @@
 
     <insert id="insert" parameterType="com.dong.domain.Employee"
             useGeneratedKeys="true" keyProperty="id">
-        insert into employee (id, username, password, salt, input_time,
+        insert into employee (id, username, password, salt, real_name, input_time,
                               tel, email, state, admin, dep_id)
-        values (#{id}, #{username}, #{password}, #{salt}, #{inputTime},
+        values (#{id}, #{username}, #{password}, #{salt}, #{realName}, #{inputTime},
                 #{tel}, #{email}, #{state}, #{admin}, #{department.id})
     </insert>
 
@@ -43,6 +44,7 @@
     <update id="updateByPrimaryKey" parameterType="com.dong.domain.Employee">
         update employee
         set username   = #{username},
+            real_name  = #{realName},
             input_time = #{inputTime},
             tel        = #{tel},
             email      = #{email},
@@ -60,8 +62,9 @@
 
     <update id="updateProfile">
         update employee
-        set tel   = #{tel},
-            email = #{email}
+        set real_name = #{realName},
+            tel       = #{tel},
+            email     = #{email}
         where id = #{id}
     </update>
 
@@ -89,6 +92,7 @@
         <where>
             <if test="keyword != null and keyword != ''">
                 e.username like concat('%', #{keyword}, '%')
+                or e.real_name like concat('%', #{keyword}, '%')
                 or e.tel like concat('%', #{keyword}, '%')
                 or e.email like concat('%', #{keyword}, '%')
             </if>
@@ -98,6 +102,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select e.id,
         e.username,
+        e.real_name,
         e.input_time,
         e.tel,
         e.email,

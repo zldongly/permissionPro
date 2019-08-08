@@ -51,6 +51,10 @@
                 <td>密码:</td>
                 <td><input type="password" name="password" class="easyui-validatebox"></td>
             </tr>
+            <tr id="real_name">
+                <td>真实姓名:</td>
+                <td><input type="text" name="realName" class="easyui-validatebox"></td>
+            </tr>
             <tr>
                 <td>手机:</td>
                 <td><input type="text" name="tel" class="easyui-validatebox"></td>

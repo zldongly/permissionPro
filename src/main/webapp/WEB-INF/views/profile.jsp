@@ -21,6 +21,11 @@
         </div>
 
         <div class="pro_un">
+            <span class="pro_ti">真实姓名</span> <br>
+            <input type="text" class="pro_in" value="${employee.realName}" name="realName">
+        </div>
+
+        <div class="pro_un">
             <span class="pro_ti">入职时间</span> <br>
             <input type="text" class="pro_in" value="${inputDate}" disabled>
         </div>

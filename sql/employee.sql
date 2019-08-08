@@ -4,6 +4,7 @@ CREATE TABLE `employee` (
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `salt` varchar(32) DEFAULT NULL,
+  `real_name` varchar(20) NOT NULL,
   `input_time` datetime DEFAULT NULL,
   `tel` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -19,5 +20,5 @@ CREATE TABLE `employee` (
 
 -- 添加一个初始管理员 用户名admin 密码admin
 INSERT INTO 
-`employee`(`id`, `username`, `password`, `salt`, `input_time`, `tel`, `email`, `state`, `admin`, `dep_id`)
-VALUES (1, 'admin', '1be8ae3613133711029d11ac391c1129', 'eb2f5466a2b94153a3f5dbdc8f61ca73', NULL, NULL, NULL, 1, 1, NULL);
+`employee`(`id`, `username`, `password`, `salt`, `real_name`, `input_time`, `tel`, `email`, `state`, `admin`, `dep_id`)
+VALUES (1, 'admin', '1be8ae3613133711029d11ac391c1129', 'eb2f5466a2b94153a3f5dbdc8f61ca73', 'admin', NULL, NULL, NULL, 1, 1, NULL);
