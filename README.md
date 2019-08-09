@@ -15,9 +15,15 @@
 ### 登录
 ![login](./screenshots/login.JPG)  
 用户名和密码进行登录，使用Shiro安全框架验证用户身份，密码通过MD5散列函数加密
+
 ### 菜单
 ![menu](./screenshots/menu.JPG)  
 登录后根据用户所拥有的权限给出相应的树形菜单
+
+### 个人信息
+![profile](./screenshots/profile.JPG)  
+在个人信息页面员工可以自己修改自己的姓名、电话等信息和修改密码
+
 ### 员工管理
 ![employee](./screenshots/employee.JPG)  
 员工管理页面展示所有员工信息，分页每页显示10名员工。  
@@ -26,11 +32,17 @@
 ![add](./screenshots/add.JPG)
 ![excelAdd](./screenshots/excelAdd.JPG)  
 通过Excel添加的需要先下载模板，按照对应的格式填写，再上传Excel文件。
+
 ### 角色权限管理
 ![role](./screenshots/role.JPG)
 管理员设置不同角色拥有的权限，在员工管理页中给员工添加角色  
 ![roleEdit](./screenshots/roleEdit.JPG)  
 一个角色可以拥有多个权限
+
+### 部门管理
+![department](./screenshots/department.JPG)  
+部门管理页面可以对部门进行添加编辑和删除操作  
+
 ### 日志记录
 使用切面编程，在方法后面追加日志记录  
 在调用每个控制器中的方法时记录下每个用户IP、时间、调用的方法名和参数
