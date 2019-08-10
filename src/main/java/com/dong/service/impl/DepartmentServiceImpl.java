@@ -11,7 +11,9 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dongly on 2019/7/20
@@ -86,6 +88,16 @@ public class DepartmentServiceImpl implements DepartmentService {
             res.setMsg("删除失败");
         }
         return res;
+    }
+
+    @Override
+    public Map getDepartMap() {
+        Map map = new HashMap();
+        List<Department> departments = departmentMapper.selectAll();
+        for (Department department : departments) {
+            map.put(department.getName(), department.getId());
+        }
+        return map;
     }
 
 }

@@ -30,12 +30,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 查找所有员工
     @Override
     public PageListRes getEmployee(QueryVo vo) {
-
-        Page<Object> page = PageHelper.startPage(vo.getPage(), vo.getRows());
+        Page<Object> page = null;
+        if (vo != null)
+            page = PageHelper.startPage(vo.getPage(), vo.getRows());
         List<Employee> employees = employeeMapper.selectAll(vo);
 
         PageListRes pageListRes = new PageListRes();
-        pageListRes.setTotal(page.getTotal());
+        if (vo != null)
+            pageListRes.setTotal(page.getTotal());
         pageListRes.setRows(employees);
 
         return pageListRes;

@@ -6,6 +6,7 @@ import com.dong.domain.PageListRes;
 import com.dong.domain.QueryVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dongly on 2019/7/20
@@ -25,4 +26,6 @@ public interface DepartmentService {
 
     // 删除
     AjaxRes deleteDepartment(Long id);
+
+    Map getDepartMap();
 }

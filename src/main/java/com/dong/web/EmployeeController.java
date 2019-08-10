@@ -1,9 +1,7 @@
 package com.dong.web;
 
-import com.dong.domain.AjaxRes;
-import com.dong.domain.Employee;
-import com.dong.domain.PageListRes;
-import com.dong.domain.QueryVo;
+import com.dong.domain.*;
+import com.dong.service.DepartmentService;
 import com.dong.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
@@ -29,7 +27,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dongly on 2019/7/19
@@ -40,6 +40,8 @@ public class EmployeeController extends BaseController{
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private DepartmentService departmentService;
 
     @RequestMapping("/employee")
     @RequiresPermissions("employee:index")
@@ -118,10 +120,7 @@ public class EmployeeController extends BaseController{
     @RequestMapping("downloadExcel")
     @ResponseBody
     public void downloadExcel(HttpServletResponse response) throws IOException {
-        QueryVo vo = new QueryVo();
-        vo.setPage(1);
-        vo.setRows(10);
-        PageListRes res = employeeService.getEmployee(vo);
+        PageListRes res = employeeService.getEmployee(null);
         List<Employee> employees = (List<Employee>) res.getRows();
         // 创建工作簿
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -133,7 +132,8 @@ public class EmployeeController extends BaseController{
         row.createCell(3).setCellValue("入职日期");
         row.createCell(4).setCellValue("电话");
         row.createCell(5).setCellValue("邮件");
-        row.createCell(6).setCellValue("在职");
+        row.createCell(6).setCellValue("部门");
+        row.createCell(7).setCellValue("在职");
         // 填写数据
         HSSFRow employeeRow = null;
         for (int i = 0; i < employees.size(); i++) {
@@ -149,10 +149,12 @@ public class EmployeeController extends BaseController{
             }
             employeeRow.createCell(4).setCellValue(employee.getTel());
             employeeRow.createCell(5).setCellValue(employee.getEmail());
+            if (employee.getDepartment() != null)
+                employeeRow.createCell(6).setCellValue(employee.getDepartment().getName());
             if (employee.getState()) {
-                employeeRow.createCell(6).setCellValue("是");
+                employeeRow.createCell(7).setCellValue("是");
             } else {
-                employeeRow.createCell(6).setCellValue("否");
+                employeeRow.createCell(7).setCellValue("否");
             }
         }
         // 下载
@@ -179,6 +181,7 @@ public class EmployeeController extends BaseController{
     @ResponseBody
     public AjaxRes uploadExcel(MultipartFile excel) {
         AjaxRes res = new AjaxRes();
+        Map map = departmentService.getDepartMap();
 
         try {
             HSSFWorkbook workbook = new HSSFWorkbook(excel.getInputStream());
@@ -195,6 +198,11 @@ public class EmployeeController extends BaseController{
                 long tel = (long) (double) getCellValue(employeeRow.getCell(4));
                 employee.setTel(String.valueOf(tel));
                 employee.setEmail((String) getCellValue(employeeRow.getCell(5)));
+                String depName = (String) getCellValue(employeeRow.getCell(6));
+                Long depId = (Long)map.get(depName);
+                Department department = new Department();
+                department.setId(depId);
+                employee.setDepartment(department);
                 employee.setPassword(employee.getUsername());
 
                 employeeService.addEmployee(employee);      // 添加一条员工数据
