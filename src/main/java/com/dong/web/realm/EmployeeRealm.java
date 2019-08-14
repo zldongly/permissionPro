@@ -36,11 +36,13 @@ public class EmployeeRealm extends AuthorizingRealm {
         List<String> roles = new ArrayList<>();
         List<String> permissions = new ArrayList<>();
 
-        if (employee.getAdmin()) {
-            permissions.add("*:*");     // 管理员拥有所有权限
-        } else {
-            roles = employeeService.getRolesByEid(employee.getId());
-            permissions = employeeService.getPermissionsByEid(employee.getId());
+        if (employee.getState()) {          // 在职员工才拥有权限
+            if (employee.getAdmin()) {
+                permissions.add("*:*");     // 管理员拥有所有权限
+            } else {
+                roles = employeeService.getRolesByEid(employee.getId());
+                permissions = employeeService.getPermissionsByEid(employee.getId());
+            }
         }
 
         // 授权

@@ -56,7 +56,8 @@
 
     <update id="updateState">
         update employee
-        set state= false
+        set state= false,
+            admin = false
         where id = #{id};
     </update>
 

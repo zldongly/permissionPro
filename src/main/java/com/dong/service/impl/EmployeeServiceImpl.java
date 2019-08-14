@@ -78,6 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void updateState(Long id) {
         employeeMapper.updateState(id);
+        employeeMapper.deleteRoleRel(id);
     }
 
     @Override
