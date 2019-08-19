@@ -32,6 +32,8 @@
 ![add](./screenshots/add.JPG)
 ![excelAdd](./screenshots/excelAdd.JPG)  
 通过Excel添加的需要先下载模板，按照对应的格式填写，再上传Excel文件。
+![excel](./screenshots/excel.JPG)  
+上图为Excel导出结果
 
 ### 角色权限管理
 ![role](./screenshots/role.JPG)
